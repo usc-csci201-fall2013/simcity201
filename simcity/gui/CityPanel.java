@@ -5,11 +5,17 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import simcity.gui.trace.AlertLog;
+import simcity.gui.trace.AlertTag;
+
 public class CityPanel extends SimCityPanel implements MouseMotionListener {
 
 	public static final int CITY_WIDTH = 600, CITY_HEIGHT = 600;
 	boolean addingObject = false;
 	CityComponent temp;
+	
+	String name = "City Panel";
+	
 	public CityPanel(SimCityGui city) {
 		super(city);
 		this.setPreferredSize(new Dimension(CITY_WIDTH, CITY_HEIGHT));
@@ -39,12 +45,16 @@ public class CityPanel extends SimCityPanel implements MouseMotionListener {
 	
 	public void mousePressed(MouseEvent arg0) {
 		if (addingObject) {
+			//make sure we aren't overlapping anything
 			for (CityComponent c: statics) {
 				if (c.equals(temp))
 					continue;
-				if (c.rectangle.intersects(temp.rectangle))
+				if (c.rectangle.intersects(temp.rectangle)) {
+					AlertLog.getInstance().logError(AlertTag.GENERAL_CITY, this.name, "Can't add building, location obstructed!");
 					return;
+				}
 			}
+			AlertLog.getInstance().logInfo(AlertTag.GENERAL_CITY, this.name, "Building successfully added");
 			addingObject = false;
 			city.view.addView(new CityCard(city, Color.pink), temp.ID);
 			temp = null;
@@ -53,6 +63,7 @@ public class CityPanel extends SimCityPanel implements MouseMotionListener {
 			if (c.contains(arg0.getX(), arg0.getY())) {
 				//city.info.setText(c.ID);
 				city.view.setView(c.ID);
+				AlertLog.getInstance().logMessage(AlertTag.GENERAL_CITY, this.name, "Building Selected: " + c.ID);
 			}
 		}
 	}

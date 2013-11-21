@@ -1,8 +1,14 @@
 package simcity.gui;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+
+import simcity.gui.trace.AlertLog;
+import simcity.gui.trace.TracePanel;
 
 public class SimCityGui extends JFrame {
 	
@@ -10,10 +16,17 @@ public class SimCityGui extends JFrame {
 	InfoPanel info;
 	CityView view;
 	CityControlPanel CP;
+	TracePanel tracePanel;
 	GridBagConstraints c = new GridBagConstraints();
 
 	public SimCityGui() throws HeadlessException {
 		CP = new CityControlPanel(this);
+		
+		tracePanel = new TracePanel();
+		tracePanel.setPreferredSize(new Dimension(CP.getPreferredSize().width, (int)(1.4*CP.getPreferredSize().height)));
+		tracePanel.showAlertsForAllLevels();
+		tracePanel.showAlertsForAllTags();
+
 		
 		city = new CityPanel(this);
 		
@@ -38,6 +51,11 @@ public class SimCityGui extends JFrame {
 		c.gridx = 0; c.gridy = 6;
 		c.gridwidth = 11; c.gridheight = 1;
 		this.add(CP, c);
+		
+		c.gridx = 0; c.gridy = 7;
+		c.gridwidth = 11; c.gridheight = 3;
+		c.fill = GridBagConstraints.BOTH;
+		this.add(tracePanel, c);
 	}
 
 	/**
