@@ -24,7 +24,9 @@ public class SimCityGui extends JFrame {
 		
 		tracePanel = new TracePanel();
 		tracePanel.setPreferredSize(new Dimension(CP.getPreferredSize().width, (int)(1.4*CP.getPreferredSize().height)));
-//		AlertLog.getInstance().addAlertListener(tracePanel);
+		tracePanel.showAlertsForAllLevels();
+		tracePanel.showAlertsForAllTags();
+
 		
 		city = new CityPanel(this);
 		

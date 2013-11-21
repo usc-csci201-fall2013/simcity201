@@ -23,7 +23,10 @@ import java.util.Set;
  */
 public class AlertLog {
 
+	/** Holds the single AlertLog instance. */
 	private static AlertLog instance = new AlertLog();
+	
+	/** List of all {@link AlertListeners} that should be notified when an alert occurs. */
 	private List<AlertListener> registeredAlertListeners;
 
 	/**
@@ -31,6 +34,8 @@ public class AlertLog {
 	 * Defaults to every level printing.
 	 */
 	private Set<AlertLevel> printedAlertLevels = Collections.synchronizedSet(EnumSet.allOf(AlertLevel.class));
+	
+	/** The list of all the Alerts. */
 	private List<Alert> alerts = Collections.synchronizedList(new ArrayList<Alert>());
 	
 
@@ -53,7 +58,7 @@ public class AlertLog {
 	}
 
 	/**
-	 * Logs an error.
+	 * Logs an error using {@link #sendAlert}.
 	 * @param tag the {@link AlertTag} saying what group type this alert is tagged as.
 	 * @param name The name of the thing sending this alert.
 	 * @param message The message of this alert.
@@ -63,7 +68,7 @@ public class AlertLog {
 	}
 	
 	/**
-	 * Logs a warning.
+	 * Logs a warning using {@link #sendAlert}.
 	 * @param tag the {@link AlertTag} saying what group type this alert is tagged as.
 	 * @param name The name of the thing sending this alert.
 	 * @param message The message of this alert.
@@ -73,7 +78,7 @@ public class AlertLog {
 	}
 	
 	/**
-	 * Logs info.
+	 * Logs info using {@link #sendAlert}.
 	 * @param tag the {@link AlertTag} saying what group type this alert is tagged as.
 	 * @param name The name of the thing sending this alert.
 	 * @param message The message of this alert.
@@ -83,7 +88,7 @@ public class AlertLog {
 	}
 	
 	/**
-	 * Logs a message.
+	 * Logs a message using {@link #sendAlert}.
 	 * @param tag the {@link AlertTag} saying what group type this alert is tagged as.
 	 * @param name The name of the thing sending this alert.
 	 * @param message The message of this alert.
@@ -93,7 +98,7 @@ public class AlertLog {
 	}
 	
 	/**
-	 * Logs a debug alert.
+	 * Logs a debug alert using {@link #sendAlert}.
 	 * @param tag the {@link AlertTag} saying what group type this alert is tagged as.
 	 * @param name The name of the thing sending this alert.
 	 * @param message The message of this alert.

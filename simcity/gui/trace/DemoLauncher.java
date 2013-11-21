@@ -83,6 +83,9 @@ public class DemoLauncher extends JFrame {
 		tracePanel.hideAlertsWithTag(AlertTag.BUS_STOP);
 		//
 		//You will have to add your own AlertTag types to the AlertTag enum for your project.
+		//There are two helper methods that enable all AlertLevels and all AlertTags that you can use
+		//if you don't want to manually enable them all.  IF NOTHING APPEARS, CHECK THAT YOU HAVE 
+		//THE RIGHT LEVELS AND TAGS TURNED ON.  That will likely be the most common problem.
 		//================================================================================
 	
 		//============================ TUTORIAL ==========================================

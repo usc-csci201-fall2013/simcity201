@@ -47,7 +47,7 @@ public class TracePanel extends JScrollPane implements AlertListener {
 
 	private List<Alert> newAlerts = Collections.synchronizedList(new ArrayList<Alert>());
 	private Set<AlertLevel> visibleLevels = Collections.synchronizedSet(EnumSet.allOf(AlertLevel.class));
-	private Set<AlertTag> visibleTags = Collections.synchronizedSet(EnumSet.allOf(AlertTag.class));
+	private Set<AlertTag> visibleTags = Collections.synchronizedSet(EnumSet.noneOf(AlertTag.class));
 
 	Dimension size;
 	Style errorStyle;
@@ -82,7 +82,9 @@ public class TracePanel extends JScrollPane implements AlertListener {
 
 		// Warning
 		StyleConstants.setForeground(warningStyle, Color.yellow);
-		StyleConstants.setBackground(warningStyle, Color.black);		//TODO: This looks ugly and is only so we could actually read the text... change it!
+		//TODO: This looks ugly and is only so we could actually read the text... change it!
+		//And maybe change font color or panel background color or something...
+		StyleConstants.setBackground(warningStyle, Color.black);
 
 		// Info
 		StyleConstants.setForeground(infoStyle, Color.blue);
@@ -166,8 +168,6 @@ public class TracePanel extends JScrollPane implements AlertListener {
 	 * Filters the trace panel according to Level and Tag and only displays those which have been enabled.
 	 */
 	private void filterTracePanel() {
-		updateTracePanel();	//update the panel to make sure we have the most recent
-
 		try {
 			traceTextPane.getStyledDocument().remove(0, traceTextPane.getStyledDocument().getLength());	//Removes the whole document
 		} catch (BadLocationException e) {
@@ -219,6 +219,22 @@ public class TracePanel extends JScrollPane implements AlertListener {
 	public void hideAlertsWithTag(AlertTag tag) {
 		this.visibleTags.remove(tag);
 		filterTracePanel();
+	}
+	
+	/**
+	 * Enables Alerts to be displayed for all Tag values in {@link AlertTag}.
+	 * Convenience method.
+	 */
+	public void showAlertsForAllTags() {
+		visibleTags = Collections.synchronizedSet(EnumSet.allOf(AlertTag.class));
+	}
+	
+	/**
+	 * Enables Alerts to be displayed for all Level values in {@link AlertLevel}.
+	 * Convenience method.
+	 */
+	public void showAlertsForAllLevels() {
+		visibleLevels = Collections.synchronizedSet(EnumSet.allOf(AlertLevel.class));
 	}
 
 	/**
