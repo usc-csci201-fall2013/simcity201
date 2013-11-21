@@ -174,6 +174,9 @@ public class AlertLog {
 	 * @param alertListener the listener to register.
 	 */
 	public void addAlertListener(AlertListener alertListener) {
-		this.registeredAlertListeners.add(alertListener);
+		if(registeredAlertListeners.contains(alertListener)) {
+			return;
+		}
+		registeredAlertListeners.add(alertListener);
 	}
 }

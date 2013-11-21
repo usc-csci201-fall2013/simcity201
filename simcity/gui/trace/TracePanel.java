@@ -21,7 +21,7 @@ import javax.swing.text.StyledDocument;
 
 /**
  * The class for managing and displaying the message traces from the factory/simcity. To be used as an 
- * {@link AlertListener} with {@link AlertLog}.  <br><br>
+ * {@link AlertListener} with {@link AlertLog}.  By default, ALL LEVELS AN NO TAGS ARE ENABLED!  <br><br>
  * 
  * When printing, the {@link AlertLevel} AND the {@link AlertTag} must be enabled to see a message.  This means that 
  * if only ERROR and INFO levels are enabled, and someone with a tag BANK_TELLER 
@@ -46,8 +46,8 @@ public class TracePanel extends JScrollPane implements AlertListener {
 	private JTextPane traceTextPane;
 
 	private List<Alert> newAlerts = Collections.synchronizedList(new ArrayList<Alert>());
-	private Set<AlertLevel> visibleLevels = Collections.synchronizedSet(EnumSet.noneOf(AlertLevel.class));
-	private Set<AlertTag> visibleTags = Collections.synchronizedSet(EnumSet.noneOf(AlertTag.class));
+	private Set<AlertLevel> visibleLevels = Collections.synchronizedSet(EnumSet.allOf(AlertLevel.class));
+	private Set<AlertTag> visibleTags = Collections.synchronizedSet(EnumSet.allOf(AlertTag.class));
 
 	Dimension size;
 	Style errorStyle;
@@ -91,11 +91,15 @@ public class TracePanel extends JScrollPane implements AlertListener {
 		StyleConstants.setForeground(defaultStyle, Color.black);
 
 
-		//Set the default visible levels
+		//Set the default visible levels, redundant with the EnumSet declaration above
 		visibleLevels.add(AlertLevel.MESSAGE);
 		visibleLevels.add(AlertLevel.ERROR);
 		visibleLevels.add(AlertLevel.WARNING);
 		visibleLevels.add(AlertLevel.INFO);
+		visibleLevels.add(AlertLevel.DEBUG);
+		
+		//Sets up the TracePanel to automatically be tied with the AlertLog.
+		AlertLog.getInstance().addAlertListener(this);
 	}
 
 	
