@@ -181,3 +181,8 @@ Now all we need to do is change the text of the info panel when we change the vi
 
 #### Step 4.8: Swing controls
 You can implement whatever you'll need for your city here. I just put in the ability to create new Restaurants and Banks, but you'll definitely need more than that. Also, try to make it look nice using your newfound knowledge of GridBagLayout. But at this point, you've essentially completed a skeleton of your gui and the next step after fleshing it out is to integrate it with your agents.
+
+### Step 5: Integrating the AlertLog and TracePanel
+These systems make it easy to log messages from your city, sort them, and have them print.  It avoids the problem of just shoving them all into the standard output console at once and trying (likely unsuccessfully) to pour over them later to figure out what happened.
+
+See the [`readme`](https://github.com/usc-csci201-fall2013/simcity201/blob/master/simcity/gui/trace/) in the trace package for more information.
