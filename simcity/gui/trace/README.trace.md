@@ -15,16 +15,20 @@ This system has also been integrated into the existing city demo.
 
 ###The Alert Log
 This code contains an AlertLog that can be used to log messages with different Levels and Tags.  The existing levels are: ERROR, WARNING, INFO, MESSAGE, and DEBUG.  A few Tags (represented by the AlertTag enum) are also listed already, although you will have to add new tags as you integrate it into your code.  Tags are just a way to sort the logs besides only the AlertLevel.  The AlertLog is a statically accessible singleton, so you can access it from anywhere in your code easily using:
-    AlertLog.getInstance();
+``` AlertLog.getInstance(); ```
     
 There are methods to log different types of alerts:
+
+```
     logError
     logWarning
     logInfo
     logMessage
     logDebug
-    
-The parameters for each of these are the same: logXXX(AlertTag tag, String name, String message);
+```
+
+The parameters for each of these are the same: 
+```logXXX(AlertTag tag, String name, String message);```
 Where the tag is a label that you use to group the message, the name is the name of the sender, and the message is the content of the message itself.  These will all be stored in the AlertLog, and will be accessed by the TracePanel.
 
 ###The Trace Panel
