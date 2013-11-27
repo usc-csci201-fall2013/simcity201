@@ -104,7 +104,7 @@ public class AlertLog {
 	 * @param message The message of this alert.
 	 */
 	public void logDebug(AlertTag tag, String name, String message) {
-		this.sendAlert(AlertLevel.MESSAGE, tag, name, message);
+		this.sendAlert(AlertLevel.DEBUG, tag, name, message);
 	}
 	
 	
